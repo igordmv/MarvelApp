@@ -1,1 +1,10 @@
-/build
+*.iml
+.gradle
+/local.properties
+
+/.ideia/*
+/.ideia/vcs.xml
+/.ideia/misc.xml
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
