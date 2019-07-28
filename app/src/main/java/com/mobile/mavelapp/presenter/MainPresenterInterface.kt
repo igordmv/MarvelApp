@@ -8,7 +8,8 @@ interface MainPresenterInterface {
 
     fun setView(context: Context, view: ViewInterface)
     fun confirmFailedRequest()
-    fun confirmSuccessdRequest(marvelDataResponse: DataResponse)
+    fun confirmSuccessRequest(marvelDataResponse: DataResponse)
     fun callHeroListRequest()
+    fun timestamp()
 
 }
