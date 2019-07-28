@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(), ViewInterface {
 
     lateinit var presenterLogic :  MainPresenter
+    private var canLoadMore : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +29,9 @@ class MainActivity : AppCompatActivity(), ViewInterface {
 
     override fun requestSuccess(results: ArrayList<Result>) {
         dismissProgressBar()
+        canLoadMore = true
+        presenterLogic.increaseOffset()
+
         results.forEach(){
             Log.e("IGOR",it.name + " " + it.id)
         }

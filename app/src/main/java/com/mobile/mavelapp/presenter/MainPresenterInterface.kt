@@ -11,5 +11,6 @@ interface MainPresenterInterface {
     fun confirmSuccessRequest(marvelDataResponse: DataResponse)
     fun callHeroListRequest()
     fun timestamp()
+    fun increaseOffset()
 
 }
