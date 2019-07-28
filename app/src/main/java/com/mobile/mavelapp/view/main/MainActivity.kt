@@ -27,13 +27,17 @@ class MainActivity : AppCompatActivity(), ViewInterface {
     }
 
     override fun requestSuccess(results: ArrayList<Result>) {
-        dimissProgressBar()
+        dismissProgressBar()
         results.forEach(){
             Log.e("IGOR",it.name + " " + it.id)
         }
     }
 
-    fun dimissProgressBar() {
+    override fun showProgressBar() {
+        pbLoading.visibility = View.VISIBLE
+    }
+
+    override fun dismissProgressBar() {
         pbLoading.visibility = View.GONE
     }
 

@@ -6,5 +6,7 @@ interface ViewInterface {
 
     fun requestFailed()
     fun requestSuccess(results: ArrayList<Result>)
+    fun showProgressBar()
+    fun dismissProgressBar()
 
 }
