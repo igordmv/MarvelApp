@@ -2,7 +2,7 @@ package com.mobile.mavelapp.presenter
 
 import android.content.Context
 import com.mobile.mavelapp.model.DataResponse
-import com.mobile.mavelapp.view.ViewInterface
+import com.mobile.mavelapp.view.main.ViewInterface
 
 interface MainPresenterInterface {
 

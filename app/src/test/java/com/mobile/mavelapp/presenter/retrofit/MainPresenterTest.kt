@@ -6,7 +6,7 @@ import com.mobile.mavelapp.model.DataResponse
 import com.mobile.mavelapp.model.Result
 import com.mobile.mavelapp.presenter.MainPresenter
 import com.mobile.mavelapp.presenter.PresenterModel
-import com.mobile.mavelapp.view.ViewInterface
+import com.mobile.mavelapp.view.main.ViewInterface
 import io.mockk.*
 import org.junit.Before
 import org.junit.Test

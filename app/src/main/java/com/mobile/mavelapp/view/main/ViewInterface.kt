@@ -1,4 +1,4 @@
-package com.mobile.mavelapp.view
+package com.mobile.mavelapp.view.main
 
 import com.mobile.mavelapp.model.Result
 

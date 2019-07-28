@@ -7,10 +7,8 @@ import com.mobile.mavelapp.R
 import com.mobile.mavelapp.injection.presenterModelResolver
 import com.mobile.mavelapp.model.Result
 import com.mobile.mavelapp.presenter.MainPresenter
-import com.mobile.mavelapp.presenter.PresenterModel
-import com.mobile.mavelapp.view.ViewInterface
 
-class MainActivity : AppCompatActivity(),  ViewInterface {
+class MainActivity : AppCompatActivity(), ViewInterface {
 
     lateinit var presenterLogic :  MainPresenter
 
