@@ -1,6 +1,7 @@
 package com.mobile.mavelapp.presenter
 
 import android.content.Context
+import android.util.Log
 import com.mobile.mavelapp.model.DataResponse
 import com.mobile.mavelapp.view.ViewInterface
 
@@ -28,6 +29,7 @@ class MainPresenter(val model: PresenterModel) : MainPresenterInterface {
     }
 
     override fun callHeroListRequest() {
+        Log.e("IGOR","bateu")
     }
 
 }
