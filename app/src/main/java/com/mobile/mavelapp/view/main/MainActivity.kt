@@ -2,15 +2,18 @@ package com.mobile.mavelapp.view.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.mobile.mavelapp.R
 import com.mobile.mavelapp.injection.presenterModelResolver
 import com.mobile.mavelapp.model.Result
 import com.mobile.mavelapp.presenter.CharactersListAdapter
 import com.mobile.mavelapp.presenter.MainPresenter
 import kotlinx.android.synthetic.main.activity_main.*
+import android.view.Gravity
+import android.widget.SearchView
+import android.widget.Toolbar
+import com.mobile.mavelapp.R
+
 
 class MainActivity : AppCompatActivity(), ViewInterface {
 
@@ -24,6 +27,8 @@ class MainActivity : AppCompatActivity(), ViewInterface {
         presenterLogic = MainPresenter(presenterModelResolver())
         presenterLogic.setView(this,this)
         presenterLogic.callHeroListRequest()
+        val search = findViewById(R.id.searchView) as SearchView
+        search.setLayoutParams(Toolbar.LayoutParams(Gravity.RIGHT))
     }
 
     override fun requestFailed() {
@@ -47,7 +52,6 @@ class MainActivity : AppCompatActivity(), ViewInterface {
             }
         }
         results.forEach(){
-            Log.e("IGOR",it.name + " " + it.id)
         }
     }
 

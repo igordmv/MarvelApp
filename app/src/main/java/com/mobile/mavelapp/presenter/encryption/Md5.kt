@@ -1,5 +1,6 @@
 package com.mobile.mavelapp.presenter.encryption
 
+import android.util.Log
 import java.security.NoSuchAlgorithmException
 
 class Md5 {
