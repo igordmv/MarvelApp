@@ -48,7 +48,7 @@ class CharactersListAdapter(val context : Context, val results : ArrayList<Resul
 
             name.text = result.name
 //            description.text = result.description
-            Glide.with(context).load(result.thumbnail?.path + "/" + "standard_medium." + result.thumbnail?.extension)
+            Glide.with(context).load(result.thumbnail?.path + "/" + "landscape_amazing." + result.thumbnail?.extension)
                 .into(image)
         }
     }
