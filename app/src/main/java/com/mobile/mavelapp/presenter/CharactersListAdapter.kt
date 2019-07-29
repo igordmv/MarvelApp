@@ -1,6 +1,7 @@
 package com.mobile.mavelapp.presenter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mobile.mavelapp.R
 import com.mobile.mavelapp.model.Result
+import com.mobile.mavelapp.view.detail.HeroDetailActivity
 import jp.wasabeef.glide.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.view_hero.view.*
 
@@ -42,6 +44,16 @@ class CharactersListAdapter(val context : Context, val results : ArrayList<Resul
             itemView.setOnClickListener(this)
         }
         override fun onClick(views: View?) {
+
+            when(views){
+                itemView ->{
+                    val intent = Intent(context, HeroDetailActivity::class.java)
+                    intent.putExtra("heroId",results.get(adapterPosition).id.toString())
+                    intent.putExtra("name",results.get(adapterPosition).name)
+                    context.startActivity(intent)
+                }
+            }
+
 
         }
         fun bindView(result: Result){
