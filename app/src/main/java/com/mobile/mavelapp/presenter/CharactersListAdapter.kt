@@ -28,7 +28,10 @@ class CharactersListAdapter(val context : Context, val results : ArrayList<Resul
             it.bindView(currentResult)
         }
     }
+    fun addItem(reult: Result) {
 
+        results.add(reult)
+    }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener{
         val name = itemView.tvHeroNameList

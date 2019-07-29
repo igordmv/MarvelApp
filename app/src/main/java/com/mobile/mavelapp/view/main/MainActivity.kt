@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import android.view.Gravity
 import android.widget.SearchView
 import android.widget.Toolbar
+import androidx.recyclerview.widget.RecyclerView
 import com.mobile.mavelapp.R
 
 
@@ -41,6 +42,12 @@ class MainActivity : AppCompatActivity(), ViewInterface {
         presenterLogic.increaseOffset()
         if( characterHeroAdapter != null){
 
+            for(i in results){
+
+                characterHeroAdapter!!.addItem(i)
+            }
+            dismissBottomProgressBar()
+            characterHeroAdapter!!.notifyDataSetChanged()
         }
         else{
             characterHeroAdapter = CharactersListAdapter(this@MainActivity, results)
@@ -50,9 +57,32 @@ class MainActivity : AppCompatActivity(), ViewInterface {
                 adapter = characterHeroAdapter
 
             }
+            recyclerListener()
         }
-        results.forEach(){
-        }
+    }
+
+    override fun recyclerListener() {
+
+        recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val llm = recyclerView!!.layoutManager as LinearLayoutManager
+
+                if (characterHeroAdapter != null && characterHeroAdapter!!.itemCount == llm.findLastVisibleItemPosition() + 5 && canLoadMore) {
+
+                    if (dy > 0) {
+
+                        presenterLogic.callHeroListRequest()
+                        canLoadMore = false
+                        showBottomProgressBar()
+                    }
+
+                }
+            }
+        })
+
     }
 
     override fun showProgressBar() {
@@ -61,6 +91,16 @@ class MainActivity : AppCompatActivity(), ViewInterface {
 
     override fun dismissProgressBar() {
         pbLoading.visibility = View.GONE
+    }
+
+    override fun showBottomProgressBar() {
+
+        pbLoadingBottom.visibility = View.VISIBLE
+    }
+
+    override fun dismissBottomProgressBar() {
+
+        pbLoadingBottom.visibility = View.GONE
     }
 
 }

@@ -8,5 +8,7 @@ interface ViewInterface {
     fun requestSuccess(results: ArrayList<Result>)
     fun showProgressBar()
     fun dismissProgressBar()
-
+    fun recyclerListener()
+    fun showBottomProgressBar()
+    fun dismissBottomProgressBar()
 }
