@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobile.mavelapp.injection.presenterModelResolver
 import com.mobile.mavelapp.model.Result
 import com.mobile.mavelapp.presenter.CharactersListAdapter
-import com.mobile.mavelapp.presenter.MainPresenter
+import com.mobile.mavelapp.presenter.main.MainPresenter
 import kotlinx.android.synthetic.main.activity_main.*
 import android.view.Gravity
 import android.widget.SearchView
@@ -20,7 +20,7 @@ import com.mobile.mavelapp.presenter.SearchedCharacterListAdapter
 
 class MainActivity : AppCompatActivity(), ViewInterface{
 
-    lateinit var presenterLogic :  MainPresenter
+    lateinit var presenterLogic : MainPresenter
     private var canLoadMore : Boolean = false
     var characterHeroAdapter : CharactersListAdapter? = null
     var searchedCharacterHeroAdapater : SearchedCharacterListAdapter? = null

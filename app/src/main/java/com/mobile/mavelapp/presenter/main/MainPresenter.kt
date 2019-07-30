@@ -1,9 +1,9 @@
-package com.mobile.mavelapp.presenter
+package com.mobile.mavelapp.presenter.main
 
 import android.content.Context
-import android.util.Log
 import com.mobile.mavelapp.constants.Constants
 import com.mobile.mavelapp.model.DataResponse
+import com.mobile.mavelapp.presenter.PresenterModel
 import com.mobile.mavelapp.presenter.encryption.Md5
 import com.mobile.mavelapp.view.main.ViewInterface
 

@@ -73,8 +73,8 @@ class SearchedCharacterListAdapter(val context : Context, val results : ArrayLis
             when(views){
                 itemView ->{
                     val intent = Intent(context, HeroDetailActivity::class.java)
-                    intent.putExtra("heroId",results.get(adapterPosition).id.toString())
-                    intent.putExtra("name",results.get(adapterPosition).name)
+                    intent.putExtra("heroId",searchResultHeroList.get(adapterPosition).id.toString())
+                    intent.putExtra("name",searchResultHeroList.get(adapterPosition).name)
                     context.startActivity(intent)
                 }
             }

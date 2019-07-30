@@ -1,4 +1,4 @@
-package com.mobile.mavelapp.presenter
+package com.mobile.mavelapp.presenter.main
 
 import android.content.Context
 import com.mobile.mavelapp.model.DataResponse

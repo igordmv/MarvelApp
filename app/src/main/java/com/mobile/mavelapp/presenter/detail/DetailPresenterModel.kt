@@ -1,21 +1,26 @@
-package com.mobile.mavelapp.presenter
+package com.mobile.mavelapp.presenter.detail
 
-import android.content.Context
-import android.util.Log
 import com.mobile.mavelapp.injection.marvelApiResolver
 import com.mobile.mavelapp.model.DataResponse
-import com.mobile.mavelapp.presenter.main.MainPresenterInterface
 import com.mobile.mavelapp.presenter.retrofit.MarvelApi
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
-class PresenterModel(var mApi : MarvelApi = marvelApiResolver()) : PresenterModelInterface {
-    lateinit var mPresenter: MainPresenterInterface
+class DetailPresenterModel(api: MarvelApi = marvelApiResolver()) : DetailModelInterface {
 
-    override fun getHeroList(context: Context, limit: Int, offset: Int, timestamp: String, publicKey: String, md5PrivateKey: String) {
-        val observable = mApi.getHeroesList(limit,offset,timestamp,publicKey,md5PrivateKey)
+
+    lateinit var mPresenter: DetailPresenter
+    var mApi: MarvelApi = api
+
+    override fun setPresenter(presenter: DetailPresenter) {
+        mPresenter = presenter
+    }
+
+    override fun getHeroDeatil(heroId:String, timestamp: String, publicKey: String, md5PrivateKey: String) {
+
+        val observable = mApi.getHeroDetail(heroId,timestamp,publicKey,md5PrivateKey)
         observable
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -25,25 +30,21 @@ class PresenterModel(var mApi : MarvelApi = marvelApiResolver()) : PresenterMode
                 }
 
                 override fun onNext(sucessResponse: DataResponse) {
-                    Log.i("SUCCESS",""+sucessResponse.status)
 
-                    mPresenter.confirmSuccessRequest(sucessResponse)
+                    mPresenter.confirmSuccessdRequest(sucessResponse)
 
                 }
 
                 override fun onError(e: Throwable) {
 
                     mPresenter.confirmFailedRequest()
-                    Log.i("ERROR",""+e)
+
                 }
 
                 override fun onComplete() {
 
                 }
             })
-    }
 
-    override fun setPresenter(presenter: MainPresenterInterface) {
-        mPresenter = presenter
     }
 }
