@@ -58,6 +58,11 @@ class HeroDetailActivity : AppCompatActivity(), DetailView{
 
     }
 
+    /**
+     *
+     *  Character handlers
+     *
+     */
     override fun requestFailed() {
         presenterLogic.callHeroDetailRequest(id)
     }
@@ -68,8 +73,14 @@ class HeroDetailActivity : AppCompatActivity(), DetailView{
             .into(detail_ImageView)
         selected_character_name.text = marvelDataResponse.data!!.results[0].name
         selected_character_description.text = marvelDataResponse.data!!.results[0].description
+        hideProgressBar()
     }
 
+    /**
+     *
+     *  Series handlers
+     *
+     */
     override fun seriesRequestFailed() {
         presenterLogic.callHeroSeriesDetailRequest(id)
     }
@@ -86,7 +97,7 @@ class HeroDetailActivity : AppCompatActivity(), DetailView{
             adapter = heroDetailedSeriesAdapter
 
         }
-        hideProgressBar()
+        pbLoadingDetailSeries.visibility = View.GONE
     }
 
     /**
@@ -111,7 +122,7 @@ class HeroDetailActivity : AppCompatActivity(), DetailView{
             adapter = heroDetailedComicsAdapter
 
         }
-        hideProgressBar()
+        pbLoadingDetailComics.visibility = View.GONE
     }
 
     /**
@@ -136,8 +147,10 @@ class HeroDetailActivity : AppCompatActivity(), DetailView{
             adapter = heroDetailedEventsAdapter
 
         }
-        hideProgressBar()
+
+        pbLoadingDetailEvents.visibility = View.GONE
     }
+
     /**
      *
      *  Stories handlers
@@ -159,7 +172,8 @@ class HeroDetailActivity : AppCompatActivity(), DetailView{
             adapter = heroDetailedStoriesAdapter
 
         }
-        hideProgressBar()
+
+        pbLoadingDetailStories.visibility = View.GONE
     }
 
 
