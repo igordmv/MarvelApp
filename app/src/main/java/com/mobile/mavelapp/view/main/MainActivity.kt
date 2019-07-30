@@ -27,9 +27,12 @@ class MainActivity : AppCompatActivity(), ViewInterface{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         presenterLogic = MainPresenter(presenterModelResolver())
         presenterLogic.setView(this,this)
         presenterLogic.callHeroListRequest()
+
+        recyclerSearched.addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL))
 
         val search = findViewById(R.id.searchView) as SearchView
         search.setLayoutParams(Toolbar.LayoutParams(Gravity.RIGHT))
