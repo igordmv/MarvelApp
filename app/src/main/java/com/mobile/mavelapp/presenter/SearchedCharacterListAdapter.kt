@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.mobile.mavelapp.R
 import com.mobile.mavelapp.model.Result
 import com.mobile.mavelapp.view.detail.HeroDetailActivity
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.view_hero.view.*
 
 class SearchedCharacterListAdapter(val context : Context, val results : ArrayList<Result>) : RecyclerView.Adapter<SearchedCharacterListAdapter.ViewHolder>(), Filterable {
@@ -83,7 +83,7 @@ class SearchedCharacterListAdapter(val context : Context, val results : ArrayLis
         }
         fun bindView(result: Result){
             name.text = result.name
-            Glide.with(context).load(result.thumbnail?.path + "/" + "standard_medium." + result.thumbnail?.extension)
+            Picasso.with(context).load(result.thumbnail?.path + "/" + "standard_medium." + result.thumbnail?.extension)
                 .into(image)
         }
     }

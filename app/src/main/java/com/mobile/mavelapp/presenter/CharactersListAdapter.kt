@@ -6,10 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.mobile.mavelapp.R
 import com.mobile.mavelapp.model.Result
 import com.mobile.mavelapp.view.detail.HeroDetailActivity
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.view_hero.view.*
 
 class CharactersListAdapter(val context : Context, val results : ArrayList<Result>) : RecyclerView.Adapter<CharactersListAdapter.ViewHolder>()  {
@@ -57,7 +57,7 @@ class CharactersListAdapter(val context : Context, val results : ArrayList<Resul
         }
         fun bindView(result: Result){
             name.text = result.name
-            Glide.with(context).load(result.thumbnail?.path + "/" + "landscape_amazing." + result.thumbnail?.extension)
+            Picasso.with(context).load(result.thumbnail?.path + "/" + "landscape_amazing." + result.thumbnail?.extension)
                 .into(image)
         }
     }
