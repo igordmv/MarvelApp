@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mobile.mavelapp.R
 import com.mobile.mavelapp.model.DetailResult
-import kotlinx.android.synthetic.main.hero_detail_activity.view.*
 import kotlinx.android.synthetic.main.view_serie.view.*
 
 class HeroDetailedSeriesAdapter(val context : Context, val results : ArrayList<DetailResult>) : RecyclerView.Adapter<HeroDetailedSeriesAdapter.ViewHolder>()  {
@@ -36,6 +35,7 @@ class HeroDetailedSeriesAdapter(val context : Context, val results : ArrayList<D
             val image = itemView.detailed_serie_image_id
             val text = itemView.detailed_serie_title_id
             text.text = result.title
+
             Glide.with(context).load(result.thumbnail?.path + "/" + "landscape_amazing." + result.thumbnail?.extension)
                 .into(image)
         }

@@ -14,7 +14,6 @@ import com.mobile.mavelapp.model.DetailDataResponse
 import com.mobile.mavelapp.presenter.HeroDetailedSeriesAdapter
 import com.mobile.mavelapp.presenter.detail.DetailPresenter
 import kotlinx.android.synthetic.main.hero_detail_activity.*
-import androidx.recyclerview.widget.RecyclerView
 import com.mobile.mavelapp.R
 
 
@@ -53,13 +52,11 @@ class HeroDetailActivity : AppCompatActivity(), DetailView{
     }
 
     override fun requestSuccess(marvelDataResponse: DataResponse) {
-        if (marvelDataResponse.data!!.results[0].name.equals(name)){
-            Glide.with(this).load(marvelDataResponse.data!!.results[0].thumbnail!!.path + "/landscape_large." + marvelDataResponse.data!!.results[0].thumbnail!!.extension).into(detail_ImageView)
-            hideProgressBar()
-            selected_character_name.text = marvelDataResponse.data!!.results[0].name
-            selected_character_description.text = marvelDataResponse.data!!.results[0].description
-        }
-
+        Glide.with(this)
+            .load(marvelDataResponse.data!!.results[0].thumbnail!!.path + "/landscape_large." + marvelDataResponse.data!!.results[0].thumbnail!!.extension)
+            .into(detail_ImageView)
+        selected_character_name.text = marvelDataResponse.data!!.results[0].name
+        selected_character_description.text = marvelDataResponse.data!!.results[0].description
     }
 
     override fun seriesRequestFailed() {
@@ -70,12 +67,11 @@ class HeroDetailActivity : AppCompatActivity(), DetailView{
         heroDetailedSeriesAdapter = HeroDetailedSeriesAdapter(this@HeroDetailActivity, marvelDetailDataResponse.data!!.results)
         recyclerDetailedSeries.apply {
 
-            val mLayoutManager = LinearLayoutManager(this@HeroDetailActivity, LinearLayoutManager.HORIZONTAL, false)
-//            recyclerDetailedSeries.layoutManager = mLayoutManager
-            layoutManager = mLayoutManager
+            layoutManager = LinearLayoutManager(this@HeroDetailActivity)
             adapter = heroDetailedSeriesAdapter
 
         }
+        hideProgressBar()
     }
 
 }
