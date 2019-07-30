@@ -5,4 +5,6 @@ import com.mobile.mavelapp.model.DataResponse
 interface DetailView {
         fun requestFailed()
         fun requestSuccess(marvelDataResponse: DataResponse)
+        fun showProgressBar()
+        fun hideProgressBar()
 }

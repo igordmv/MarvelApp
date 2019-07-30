@@ -1,15 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-android:background="@color/searchViewColor">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/searchViewColor">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:gravity="center|left"
+                  android:orientation="vertical">
 
-<ImageView android:layout_width="match_parent"
-           android:layout_height="400dp"
-           android:id="@+id/detail_ImageView"
+    <ImageView
+            android:id="@+id/detail_ImageView"
+               android:layout_width="fill_parent"
+               android:layout_height="400dp"
+               android:layout_centerHorizontal="true"
+               android:scaleType="centerCrop"
+               app:srcCompat="@drawable/man"/>
 
-/>
+        <ProgressBar
+                android:id="@+id/pbLoadingDetailView"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"/>
+
+        <TextView android:layout_width="100dp"
+                  android:layout_height="30dp"
+                  android:text="NAME"
+                  android:textSize="17dp"
+                  android:layout_marginLeft="10dp"
+                  android:layout_marginTop="10dp"
+                  android:textColor="@color/red"/>
+
+        <TextView
+                 android:id="@+id/selected_character_name"
+                  android:layout_width="100dp"
+                  android:layout_height="30dp"
+                  android:text="NAME"
+                  android:textSize="22dp"
+                 android:layout_marginLeft="10dp"
+                  android:textColor="@color/white"/>
+
+        <TextView android:layout_width="120dp"
+                  android:layout_height="30dp"
+                  android:text="DESCRIPTION"
+                  android:textSize="17dp"
+                  android:layout_marginLeft="10dp"
+                  android:layout_marginTop="10dp"
+                  android:textColor="@color/red"/>
+
+        <TextView
+                android:id="@+id/selected_character_description"
+                android:layout_width="fill_parent"
+                android:layout_height="100dp"
+                android:text="NAME"
+                android:textSize="18dp"
+                android:scrollbars = "vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/white"/>
 
 
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>
