@@ -107,5 +107,20 @@
                 android:layout_height="match_parent">
         </androidx.recyclerview.widget.RecyclerView>
 
+
+        <TextView android:layout_width="120dp"
+                  android:layout_height="30dp"
+                  android:text="STORIES"
+                  android:textSize="17dp"
+                  android:layout_marginLeft="10dp"
+                  android:layout_marginTop="10dp"
+                  android:textColor="@color/red"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerDetailedStories"
+                android:scaleType="centerCrop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+        </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
 </ScrollView>

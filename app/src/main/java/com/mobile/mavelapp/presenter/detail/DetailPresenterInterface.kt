@@ -15,9 +15,12 @@ interface DetailPresenterInterface {
     fun confirmFailedComicsRequest()
     fun confirmSuccessedEventsRequest(marvelDetailDataResponse: DetailDataResponse)
     fun confirmFailedEventsRequest()
+    fun confirmSuccessedStoriesRequest(marvelDetailDataResponse: DetailDataResponse)
+    fun confirmFailedStoriesRequest()
     fun callHeroDetailRequest(heroId: String)
     fun callHeroSeriesDetailRequest(heroId: String)
     fun callHeroComicsDetailRequest(heroId: String)
     fun callHeroEventsDetailRequest(heroId: String)
+    fun callHeroStoriesDetailRequest(heroId: String)
     fun timestamp()
 }

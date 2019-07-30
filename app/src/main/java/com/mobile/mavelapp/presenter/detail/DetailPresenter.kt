@@ -51,6 +51,23 @@ class DetailPresenter(val model: DetailPresenterModel) : DetailPresenterInterfac
     override fun confirmSuccessedEventsRequest(marvelDetailDataResponse: DetailDataResponse) {
         mView.eventsRequestSuccess(marvelDetailDataResponse)
     }
+    override fun confirmSuccessedStoriesRequest(marvelDetailDataResponse: DetailDataResponse) {
+        mView.storiesRequestSuccess(marvelDetailDataResponse)
+    }
+
+    override fun confirmFailedStoriesRequest() {
+        mView.storiesRequestFailed()
+    }
+
+    override fun callHeroStoriesDetailRequest(heroId: String) {
+        timestamp()
+        model.getHeroDetailStories(
+            heroId,
+            timestampStr!!,
+            Constants.PUBLIC_API_KEY,
+            Md5().generateMd5FromString(timestampStr+ Constants.PRIVATE_API_KEY+ Constants.PUBLIC_API_KEY))
+    }
+
 
     override fun callHeroEventsDetailRequest(heroId: String) {
         timestamp()

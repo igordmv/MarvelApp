@@ -24,4 +24,7 @@ interface MarvelApi {
     @GET("characters/{characterId}/events")
     fun getHeroDetailEvents(@Path("characterId") id: String, @Query("ts") ts: String, @Query("apikey") apikey: String, @Query("hash") hash: String): Observable<DetailDataResponse>
 
+    @GET("characters/{characterId}/stories")
+    fun getHeroDetailStories(@Path("characterId") id: String, @Query("ts") ts: String, @Query("apikey") apikey: String, @Query("hash") hash: String): Observable<DetailDataResponse>
+
 }

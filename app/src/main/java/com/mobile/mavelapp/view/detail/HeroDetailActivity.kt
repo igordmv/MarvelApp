@@ -12,6 +12,7 @@ import com.mobile.mavelapp.model.DetailDataResponse
 import com.mobile.mavelapp.presenter.adapters.comics.HeroDetailedComicsAdapter
 import com.mobile.mavelapp.presenter.adapters.events.HeroDetailedEventsAdapter
 import com.mobile.mavelapp.presenter.adapters.series.HeroDetailedSeriesAdapter
+import com.mobile.mavelapp.presenter.adapters.stories.HeroDetailedStoriesAdapter
 import com.mobile.mavelapp.presenter.detail.DetailPresenter
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.hero_detail_activity.*
@@ -27,6 +28,8 @@ class HeroDetailActivity : AppCompatActivity(), DetailView{
     var heroDetailedSeriesAdapter : HeroDetailedSeriesAdapter? = null
     var heroDetailedComicsAdapter : HeroDetailedComicsAdapter? = null
     var heroDetailedEventsAdapter : HeroDetailedEventsAdapter? = null
+    var heroDetailedStoriesAdapter : HeroDetailedStoriesAdapter? = null
+
 
 
     override fun showProgressBar() {
@@ -51,6 +54,7 @@ class HeroDetailActivity : AppCompatActivity(), DetailView{
         presenterLogic.callHeroSeriesDetailRequest(id)
         presenterLogic.callHeroComicsDetailRequest(id)
         presenterLogic.callHeroEventsDetailRequest(id)
+        presenterLogic.callHeroStoriesDetailRequest(id)
 
     }
 
@@ -134,5 +138,29 @@ class HeroDetailActivity : AppCompatActivity(), DetailView{
         }
         hideProgressBar()
     }
+    /**
+     *
+     *  Stories handlers
+     *
+     */
+
+    override fun storiesRequestFailed() {
+        presenterLogic.callHeroStoriesDetailRequest(id)
+    }
+
+    override fun storiesRequestSuccess(marvelDetailDataResponse: DetailDataResponse) {     val mLayoutManager = LinearLayoutManager(this@HeroDetailActivity, LinearLayoutManager.HORIZONTAL, false)
+        heroDetailedStoriesAdapter = HeroDetailedStoriesAdapter(
+            this@HeroDetailActivity,
+            marvelDetailDataResponse.data!!.results
+        )
+        recyclerDetailedStories.apply {
+
+            layoutManager = mLayoutManager
+            adapter = heroDetailedStoriesAdapter
+
+        }
+        hideProgressBar()
+    }
+
 
 }

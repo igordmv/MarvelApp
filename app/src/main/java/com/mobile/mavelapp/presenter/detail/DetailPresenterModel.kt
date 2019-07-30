@@ -10,6 +10,41 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
 class DetailPresenterModel(api: MarvelApi = marvelApiResolver()) : DetailModelInterface {
+    lateinit var mPresenter: DetailPresenter
+    var mApi: MarvelApi = api
+
+    override fun setPresenter(presenter: DetailPresenter) {
+        mPresenter = presenter
+    }
+
+
+    override fun getHeroDetailStories(heroId: String, timestamp: String, publicKey: String, md5PrivateKey: String) {
+        val observable = mApi.getHeroDetailStories(heroId,timestamp,publicKey,md5PrivateKey)
+        observable
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : Observer<DetailDataResponse> {
+                override fun onSubscribe(d: Disposable) {
+
+                }
+
+                override fun onNext(sucessResponse: DetailDataResponse) {
+
+                    mPresenter.confirmSuccessedStoriesRequest(sucessResponse)
+
+                }
+
+                override fun onError(e: Throwable) {
+                    mPresenter.confirmFailedStoriesRequest()
+
+                }
+
+                override fun onComplete() {
+
+                }
+            })
+    }
+
     override fun getHeroDetailEvents(heroId: String, timestamp: String, publicKey: String, md5PrivateKey: String) {
         val observable = mApi.getHeroDetailEvents(heroId,timestamp,publicKey,md5PrivateKey)
         observable
@@ -90,14 +125,6 @@ class DetailPresenterModel(api: MarvelApi = marvelApiResolver()) : DetailModelIn
                 }
             })
 
-    }
-
-
-    lateinit var mPresenter: DetailPresenter
-    var mApi: MarvelApi = api
-
-    override fun setPresenter(presenter: DetailPresenter) {
-        mPresenter = presenter
     }
 
     override fun getHeroDetail(heroId:String, timestamp: String, publicKey: String, md5PrivateKey: String) {
