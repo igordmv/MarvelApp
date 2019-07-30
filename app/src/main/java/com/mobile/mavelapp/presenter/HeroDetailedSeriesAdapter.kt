@@ -36,7 +36,7 @@ class HeroDetailedSeriesAdapter(val context : Context, val results : ArrayList<D
             val text = itemView.detailed_serie_title_id
             text.text = result.title
 
-            Picasso.with(context).load(result.thumbnail?.path + "/" + "landscape_amazing." + result.thumbnail?.extension)
+            Picasso.with(context).load(result.thumbnail?.path + "/" + "landscape_incredible." + result.thumbnail?.extension)
                 .into(image)
         }
     }

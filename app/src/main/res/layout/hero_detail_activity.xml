@@ -62,8 +62,17 @@
                 android:layout_marginRight="10dp"
                 android:textColor="@color/white"/>
 
+        <TextView android:layout_width="120dp"
+                  android:layout_height="30dp"
+                  android:text="SERIES"
+                  android:textSize="17dp"
+                  android:layout_marginLeft="10dp"
+                  android:layout_marginTop="10dp"
+                  android:textColor="@color/red"/>
+
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerDetailedSeries"
+                android:scaleType="centerCrop"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
         </androidx.recyclerview.widget.RecyclerView>

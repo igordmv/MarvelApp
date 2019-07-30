@@ -15,6 +15,8 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.hero_detail_activity.*
 
 
+
+
 class HeroDetailActivity : AppCompatActivity(), DetailView{
     lateinit var presenterLogic : DetailPresenter
     lateinit var id : String
@@ -63,10 +65,11 @@ class HeroDetailActivity : AppCompatActivity(), DetailView{
     }
 
     override fun seriesRequestSuccess(marvelDetailDataResponse: DetailDataResponse) {
+        val mLayoutManager = LinearLayoutManager(this@HeroDetailActivity, LinearLayoutManager.HORIZONTAL, false)
         heroDetailedSeriesAdapter = HeroDetailedSeriesAdapter(this@HeroDetailActivity, marvelDetailDataResponse.data!!.results)
         recyclerDetailedSeries.apply {
 
-            layoutManager = LinearLayoutManager(this@HeroDetailActivity)
+            layoutManager = mLayoutManager
             adapter = heroDetailedSeriesAdapter
 
         }

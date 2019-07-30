@@ -5,8 +5,11 @@
               android:layout_height="wrap_content">
  <ImageView
          android:id="@+id/detailed_serie_image_id"
-         android:layout_width="match_parent"
-            android:layout_height="250dp"
+         android:layout_width="900px"
+            android:layout_height="506px"
+         android:layout_centerHorizontal="true"
+         android:layout_marginLeft="20dp"
+         android:scaleType="centerCrop"
             app:srcCompat="@drawable/man"
  />
 
