@@ -3,20 +3,28 @@ package com.mobile.mavelapp.view.detail
 import android.os.Bundle
 import android.text.method.MovementMethod
 import android.text.method.ScrollingMovementMethod
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.mobile.mavelapp.R
 import com.mobile.mavelapp.injection.detailPresenterModelResolver
 import com.mobile.mavelapp.model.DataResponse
 import com.mobile.mavelapp.model.DetailDataResponse
+import com.mobile.mavelapp.presenter.HeroDetailedSeriesAdapter
 import com.mobile.mavelapp.presenter.detail.DetailPresenter
 import kotlinx.android.synthetic.main.hero_detail_activity.*
+import androidx.recyclerview.widget.RecyclerView
+import com.mobile.mavelapp.R
 
 
 class HeroDetailActivity : AppCompatActivity(), DetailView{
+    lateinit var presenterLogic : DetailPresenter
+    lateinit var id : String
+    lateinit var name : String
+    var heroDetailedSeriesAdapter : HeroDetailedSeriesAdapter? = null
+
+
     override fun showProgressBar() {
         pbLoadingDetailView.visibility = View.VISIBLE
     }
@@ -24,10 +32,6 @@ class HeroDetailActivity : AppCompatActivity(), DetailView{
     override fun hideProgressBar() {
         pbLoadingDetailView.visibility = View.GONE
     }
-
-    lateinit var presenterLogic : DetailPresenter
-    lateinit var id : String
-    lateinit var name : String
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -41,6 +45,7 @@ class HeroDetailActivity : AppCompatActivity(), DetailView{
         presenterLogic.setView(this,this)
         presenterLogic.callHeroDetailRequest(id)
         presenterLogic.callHeroSeriesDetailRequest(id)
+
     }
 
     override fun requestFailed() {
@@ -53,7 +58,6 @@ class HeroDetailActivity : AppCompatActivity(), DetailView{
             hideProgressBar()
             selected_character_name.text = marvelDataResponse.data!!.results[0].name
             selected_character_description.text = marvelDataResponse.data!!.results[0].description
-            selected_character_description.movementMethod = ScrollingMovementMethod() as MovementMethod?
         }
 
     }
@@ -63,9 +67,15 @@ class HeroDetailActivity : AppCompatActivity(), DetailView{
     }
 
     override fun seriesRequestSuccess(marvelDetailDataResponse: DetailDataResponse) {
-        marvelDetailDataResponse.data!!.results.forEach({
-            Log.e("IGOR",it.title)
-        })
+        heroDetailedSeriesAdapter = HeroDetailedSeriesAdapter(this@HeroDetailActivity, marvelDetailDataResponse.data!!.results)
+        recyclerDetailedSeries.apply {
+
+            val mLayoutManager = LinearLayoutManager(this@HeroDetailActivity, LinearLayoutManager.HORIZONTAL, false)
+//            recyclerDetailedSeries.layoutManager = mLayoutManager
+            layoutManager = mLayoutManager
+            adapter = heroDetailedSeriesAdapter
+
+        }
     }
 
 }
