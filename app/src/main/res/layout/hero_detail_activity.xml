@@ -35,7 +35,7 @@
 
         <TextView
                  android:id="@+id/selected_character_name"
-                  android:layout_width="100dp"
+                  android:layout_width="wrap_content"
                   android:layout_height="30dp"
                   android:text="NAME"
                   android:textSize="22dp"
