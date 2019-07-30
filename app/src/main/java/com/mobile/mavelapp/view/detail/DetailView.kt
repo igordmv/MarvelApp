@@ -10,6 +10,8 @@ interface DetailView {
         fun seriesRequestSuccess(marvelDetailDataResponse: DetailDataResponse)
         fun comicsRequestFailed()
         fun comicsRequestSuccess(marvelDetailDataResponse: DetailDataResponse)
+        fun eventsRequestFailed()
+        fun eventsRequestSuccess(marvelDetailDataResponse: DetailDataResponse)
         fun showProgressBar()
         fun hideProgressBar()
 }

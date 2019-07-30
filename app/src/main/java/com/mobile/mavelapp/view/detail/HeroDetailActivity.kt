@@ -10,6 +10,7 @@ import com.mobile.mavelapp.injection.detailPresenterModelResolver
 import com.mobile.mavelapp.model.DataResponse
 import com.mobile.mavelapp.model.DetailDataResponse
 import com.mobile.mavelapp.presenter.adapters.comics.HeroDetailedComicsAdapter
+import com.mobile.mavelapp.presenter.adapters.events.HeroDetailedEventsAdapter
 import com.mobile.mavelapp.presenter.adapters.series.HeroDetailedSeriesAdapter
 import com.mobile.mavelapp.presenter.detail.DetailPresenter
 import com.squareup.picasso.Picasso
@@ -19,11 +20,13 @@ import kotlinx.android.synthetic.main.hero_detail_activity.*
 
 
 class HeroDetailActivity : AppCompatActivity(), DetailView{
+
     lateinit var presenterLogic : DetailPresenter
     lateinit var id : String
     lateinit var name : String
     var heroDetailedSeriesAdapter : HeroDetailedSeriesAdapter? = null
     var heroDetailedComicsAdapter : HeroDetailedComicsAdapter? = null
+    var heroDetailedEventsAdapter : HeroDetailedEventsAdapter? = null
 
 
     override fun showProgressBar() {
@@ -47,11 +50,12 @@ class HeroDetailActivity : AppCompatActivity(), DetailView{
         presenterLogic.callHeroDetailRequest(id)
         presenterLogic.callHeroSeriesDetailRequest(id)
         presenterLogic.callHeroComicsDetailRequest(id)
+        presenterLogic.callHeroEventsDetailRequest(id)
 
     }
 
     override fun requestFailed() {
-        Toast.makeText(this@HeroDetailActivity,"Request falhou", Toast.LENGTH_SHORT).show()
+        presenterLogic.callHeroDetailRequest(id)
     }
 
     override fun requestSuccess(marvelDataResponse: DataResponse) {
@@ -63,8 +67,7 @@ class HeroDetailActivity : AppCompatActivity(), DetailView{
     }
 
     override fun seriesRequestFailed() {
-        hideProgressBar()
-        Toast.makeText(this@HeroDetailActivity,"Request falhou", Toast.LENGTH_SHORT).show()
+        presenterLogic.callHeroSeriesDetailRequest(id)
     }
 
     override fun seriesRequestSuccess(marvelDetailDataResponse: DetailDataResponse) {
@@ -81,9 +84,15 @@ class HeroDetailActivity : AppCompatActivity(), DetailView{
         }
         hideProgressBar()
     }
+
+    /**
+     *
+     *  Comics handlers
+     *
+     */
+
     override fun comicsRequestFailed() {
-        hideProgressBar()
-        Toast.makeText(this@HeroDetailActivity,"Request falhou", Toast.LENGTH_SHORT).show()
+        presenterLogic.callHeroComicsDetailRequest(id)
     }
 
     override fun comicsRequestSuccess(marvelDetailDataResponse: DetailDataResponse) {
@@ -101,5 +110,29 @@ class HeroDetailActivity : AppCompatActivity(), DetailView{
         hideProgressBar()
     }
 
+    /**
+     *
+     *  Events handlers
+     *
+     */
+
+    override fun eventsRequestFailed() {
+        presenterLogic.callHeroEventsDetailRequest(id)
+    }
+
+    override fun eventsRequestSuccess(marvelDetailDataResponse: DetailDataResponse) {
+        val mLayoutManager = LinearLayoutManager(this@HeroDetailActivity, LinearLayoutManager.HORIZONTAL, false)
+        heroDetailedEventsAdapter = HeroDetailedEventsAdapter(
+            this@HeroDetailActivity,
+            marvelDetailDataResponse.data!!.results
+        )
+        recyclerDetailedEvents.apply {
+
+            layoutManager = mLayoutManager
+            adapter = heroDetailedEventsAdapter
+
+        }
+        hideProgressBar()
+    }
 
 }

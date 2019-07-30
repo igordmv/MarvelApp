@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content">
+    <ImageView
+            android:id="@+id/detailed_events_image_id"
+            android:layout_width="900px"
+            android:layout_height="506px"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/man"
+    />
+
+    <TextView
+            android:id="@+id/detailed_events_title_id"
+            android:layout_width="300dp"
+            android:layout_height="35dp"
+            android:gravity="center"
+            android:layout_marginTop="02dp"
+            android:layout_centerHorizontal="true"
+            android:text="SERIE TITLE"
+            android:background="@color/searchViewColor"
+            android:textColor="@color/white"
+            android:layout_below="@id/detailed_events_image_id"/>
+</RelativeLayout >
