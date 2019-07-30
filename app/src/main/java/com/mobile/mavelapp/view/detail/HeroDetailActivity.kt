@@ -52,7 +52,7 @@ class HeroDetailActivity : AppCompatActivity(), DetailView{
             hideProgressBar()
             selected_character_name.text = marvelDataResponse.data!!.results[0].name
             selected_character_description.text = marvelDataResponse.data!!.results[0].description
-
+            selected_character_description.movementMethod = ScrollingMovementMethod()
         }
 
     }
