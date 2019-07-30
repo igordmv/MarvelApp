@@ -60,6 +60,7 @@ class HeroDetailActivity : AppCompatActivity(), DetailView{
     }
 
     override fun seriesRequestFailed() {
+        hideProgressBar()
         Toast.makeText(this@HeroDetailActivity,"Request falhou", Toast.LENGTH_SHORT).show()
     }
 
