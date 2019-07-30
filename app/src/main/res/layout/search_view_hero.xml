@@ -12,12 +12,11 @@
 
 
     <TextView app:layout_constraintTop_toTopOf="parent"
-              android:textStyle="bold"
               android:id="@+id/tvHeroNameList"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:background="@color/white"
-              android:textColor="@color/black"
+              android:background="@color/searchViewColor"
+              android:textColor="@color/white"
               android:layout_toRightOf="@id/ivHeroList"
               android:layout_centerInParent="true"
               android:layout_marginLeft="20dp"
