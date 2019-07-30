@@ -12,24 +12,49 @@ import kotlinx.android.synthetic.main.activity_main.*
 import android.view.Gravity
 import android.widget.SearchView
 import android.widget.Toolbar
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.mobile.mavelapp.R
+import com.mobile.mavelapp.presenter.SearchedCharacterListAdapter
 
 
-class MainActivity : AppCompatActivity(), ViewInterface {
+class MainActivity : AppCompatActivity(), ViewInterface{
 
     lateinit var presenterLogic :  MainPresenter
     private var canLoadMore : Boolean = false
     var characterHeroAdapter : CharactersListAdapter? = null
-
+    var searchedCharacterHeroAdapater : SearchedCharacterListAdapter? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         presenterLogic = MainPresenter(presenterModelResolver())
         presenterLogic.setView(this,this)
         presenterLogic.callHeroListRequest()
+
         val search = findViewById(R.id.searchView) as SearchView
         search.setLayoutParams(Toolbar.LayoutParams(Gravity.RIGHT))
+        search.setOnQueryTextFocusChangeListener { _ , hasFocus ->
+            if (hasFocus) {
+                recycler.visibility = View.GONE
+                recyclerSearched.visibility = View.VISIBLE
+            } else {
+                recycler.visibility = View.VISIBLE
+                recyclerSearched.visibility = View.GONE
+            }
+        }
+        search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                searchedCharacterHeroAdapater?.filter?.filter(newText)
+                return false
+            }
+
+            override fun onQueryTextSubmit(query: String): Boolean {
+                searchedCharacterHeroAdapater?.filter?.filter(query)
+                return false
+            }
+
+        })
     }
 
     override fun requestFailed() {
@@ -41,16 +66,20 @@ class MainActivity : AppCompatActivity(), ViewInterface {
         canLoadMore = true
         presenterLogic.increaseOffset()
         if( characterHeroAdapter != null){
+            for(result in results){
 
-            for(i in results){
-
-                characterHeroAdapter!!.addItem(i)
+                characterHeroAdapter!!.addItem(result)
             }
             dismissBottomProgressBar()
             characterHeroAdapter!!.notifyDataSetChanged()
         }
         else{
             characterHeroAdapter = CharactersListAdapter(this@MainActivity, results)
+            searchedCharacterHeroAdapater = SearchedCharacterListAdapter(this@MainActivity, results)
+            recyclerSearched.apply {
+                layoutManager = LinearLayoutManager(this@MainActivity)
+                adapter = searchedCharacterHeroAdapater
+            }
             recycler.apply {
 
                 layoutManager = LinearLayoutManager(this@MainActivity)
@@ -82,7 +111,6 @@ class MainActivity : AppCompatActivity(), ViewInterface {
                 }
             }
         })
-
     }
 
     override fun showProgressBar() {

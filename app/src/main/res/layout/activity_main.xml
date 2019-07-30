@@ -25,6 +25,15 @@
             android:layout_height="match_parent">
     </androidx.recyclerview.widget.RecyclerView>
 
+    <androidx.recyclerview.widget.RecyclerView
+            android:visibility="gone"
+            android:layout_below="@id/toolbar"
+            android:id="@+id/recyclerSearched"
+            android:layout_width="match_parent"
+            android:background="@color/searchViewColor"
+            android:layout_height="match_parent">
+    </androidx.recyclerview.widget.RecyclerView>
+
     <ProgressBar
             android:visibility="gone"
             android:id="@+id/pbLoadingBottom"

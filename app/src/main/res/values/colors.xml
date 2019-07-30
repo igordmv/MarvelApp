@@ -6,4 +6,5 @@
     <color name="divider">#c3c3c3</color>
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
+    <color name="searchViewColor">#404447</color>
 </resources>
