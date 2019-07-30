@@ -1,6 +1,7 @@
 package com.mobile.mavelapp.presenter.retrofit
 
 import com.mobile.mavelapp.model.DataResponse
+import com.mobile.mavelapp.model.DetailDataResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -15,6 +16,6 @@ interface MarvelApi {
     fun getHeroDetail(@Path("characterId") id: String, @Query("ts") ts: String, @Query("apikey") apikey: String, @Query("hash") hash: String): Observable<DataResponse>
 
     @GET("characters/{characterId}/series")
-    fun getHeroDetailSeries(@Path("characterId") id: String, @Query("ts") ts: String, @Query("apikey") apikey: String, @Query("hash") hash: String): Observable<DataResponse>
+    fun getHeroDetailSeries(@Path("characterId") id: String, @Query("ts") ts: String, @Query("apikey") apikey: String, @Query("hash") hash: String): Observable<DetailDataResponse>
 
 }

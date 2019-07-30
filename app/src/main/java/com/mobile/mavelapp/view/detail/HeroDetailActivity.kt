@@ -1,18 +1,18 @@
 package com.mobile.mavelapp.view.detail
 
 import android.os.Bundle
+import android.text.method.MovementMethod
 import android.text.method.ScrollingMovementMethod
-import androidx.appcompat.app.AppCompatActivity
-import com.mobile.mavelapp.R
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.mobile.mavelapp.injection.marvelApiResolver
+import com.mobile.mavelapp.R
 import com.mobile.mavelapp.injection.detailPresenterModelResolver
 import com.mobile.mavelapp.model.DataResponse
+import com.mobile.mavelapp.model.DetailDataResponse
 import com.mobile.mavelapp.presenter.detail.DetailPresenter
-import com.mobile.mavelapp.presenter.retrofit.MarvelApi
 import kotlinx.android.synthetic.main.hero_detail_activity.*
 
 
@@ -40,6 +40,7 @@ class HeroDetailActivity : AppCompatActivity(), DetailView{
         presenterLogic = DetailPresenter(detailPresenterModelResolver())
         presenterLogic.setView(this,this)
         presenterLogic.callHeroDetailRequest(id)
+        presenterLogic.callHeroSeriesDetailRequest(id)
     }
 
     override fun requestFailed() {
@@ -52,9 +53,19 @@ class HeroDetailActivity : AppCompatActivity(), DetailView{
             hideProgressBar()
             selected_character_name.text = marvelDataResponse.data!!.results[0].name
             selected_character_description.text = marvelDataResponse.data!!.results[0].description
-            selected_character_description.movementMethod = ScrollingMovementMethod()
+            selected_character_description.movementMethod = ScrollingMovementMethod() as MovementMethod?
         }
 
+    }
+
+    override fun seriesRequestFailed() {
+        Toast.makeText(this@HeroDetailActivity,"Request falhou", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun seriesRequestSuccess(marvelDetailDataResponse: DetailDataResponse) {
+        marvelDetailDataResponse.data!!.results.forEach({
+            Log.e("IGOR",it.title)
+        })
     }
 
 }

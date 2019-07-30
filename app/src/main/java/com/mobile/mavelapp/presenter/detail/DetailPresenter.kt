@@ -3,12 +3,11 @@ package com.mobile.mavelapp.presenter.detail
 import android.content.Context
 import com.mobile.mavelapp.constants.Constants
 import com.mobile.mavelapp.model.DataResponse
-import com.mobile.mavelapp.presenter.PresenterModel
+import com.mobile.mavelapp.model.DetailDataResponse
 import com.mobile.mavelapp.presenter.encryption.Md5
 import com.mobile.mavelapp.view.detail.DetailView
 
 class DetailPresenter(val model: DetailPresenterModel) : DetailPresenterInterface {
-
     lateinit var mContext: Context
     lateinit var mView: DetailView
     var timestampStr: String? = null
@@ -26,19 +25,32 @@ class DetailPresenter(val model: DetailPresenterModel) : DetailPresenterInterfac
         mView.requestFailed()
     }
 
-    override fun confirmSuccessdRequest(marvelDataResponse: DataResponse) {
+    override fun confirmSuccessedRequest(marvelDataResponse: DataResponse) {
         mView.requestSuccess(marvelDataResponse)
     }
+    override fun confirmSuccessedSeriesRequest(marvelDetailDataResponse: DetailDataResponse) {
+        mView.seriesRequestSuccess(marvelDetailDataResponse)
+    }
 
+    override fun confirmFailedSeriesRequest() {
+        mView.seriesRequestFailed()
+    }
     override fun callHeroDetailRequest(heroId: String) {
         timestamp()
-        model.getHeroDeatil(
+        model.getHeroDetail(
             heroId,
             timestampStr!!,
             Constants.PUBLIC_API_KEY,
             Md5().generateMd5FromString(timestampStr+ Constants.PRIVATE_API_KEY+ Constants.PUBLIC_API_KEY))
     }
-
+    override fun callHeroSeriesDetailRequest(heroId: String) {
+        timestamp()
+        model.getHeroDetailSeries(
+            heroId,
+            timestampStr!!,
+            Constants.PUBLIC_API_KEY,
+            Md5().generateMd5FromString(timestampStr+ Constants.PRIVATE_API_KEY+ Constants.PUBLIC_API_KEY))
+    }
     override fun timestamp() {
 
         val tsLong = System.currentTimeMillis() / 1000
