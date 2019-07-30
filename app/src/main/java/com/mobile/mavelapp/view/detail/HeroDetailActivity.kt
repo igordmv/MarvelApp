@@ -9,7 +9,8 @@ import com.mobile.mavelapp.R
 import com.mobile.mavelapp.injection.detailPresenterModelResolver
 import com.mobile.mavelapp.model.DataResponse
 import com.mobile.mavelapp.model.DetailDataResponse
-import com.mobile.mavelapp.presenter.HeroDetailedSeriesAdapter
+import com.mobile.mavelapp.presenter.adapters.comics.HeroDetailedComicsAdapter
+import com.mobile.mavelapp.presenter.adapters.series.HeroDetailedSeriesAdapter
 import com.mobile.mavelapp.presenter.detail.DetailPresenter
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.hero_detail_activity.*
@@ -22,6 +23,7 @@ class HeroDetailActivity : AppCompatActivity(), DetailView{
     lateinit var id : String
     lateinit var name : String
     var heroDetailedSeriesAdapter : HeroDetailedSeriesAdapter? = null
+    var heroDetailedComicsAdapter : HeroDetailedComicsAdapter? = null
 
 
     override fun showProgressBar() {
@@ -44,6 +46,7 @@ class HeroDetailActivity : AppCompatActivity(), DetailView{
         presenterLogic.setView(this,this)
         presenterLogic.callHeroDetailRequest(id)
         presenterLogic.callHeroSeriesDetailRequest(id)
+        presenterLogic.callHeroComicsDetailRequest(id)
 
     }
 
@@ -66,7 +69,10 @@ class HeroDetailActivity : AppCompatActivity(), DetailView{
 
     override fun seriesRequestSuccess(marvelDetailDataResponse: DetailDataResponse) {
         val mLayoutManager = LinearLayoutManager(this@HeroDetailActivity, LinearLayoutManager.HORIZONTAL, false)
-        heroDetailedSeriesAdapter = HeroDetailedSeriesAdapter(this@HeroDetailActivity, marvelDetailDataResponse.data!!.results)
+        heroDetailedSeriesAdapter = HeroDetailedSeriesAdapter(
+            this@HeroDetailActivity,
+            marvelDetailDataResponse.data!!.results
+        )
         recyclerDetailedSeries.apply {
 
             layoutManager = mLayoutManager
@@ -75,5 +81,25 @@ class HeroDetailActivity : AppCompatActivity(), DetailView{
         }
         hideProgressBar()
     }
+    override fun comicsRequestFailed() {
+        hideProgressBar()
+        Toast.makeText(this@HeroDetailActivity,"Request falhou", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun comicsRequestSuccess(marvelDetailDataResponse: DetailDataResponse) {
+        val mLayoutManager = LinearLayoutManager(this@HeroDetailActivity, LinearLayoutManager.HORIZONTAL, false)
+        heroDetailedComicsAdapter = HeroDetailedComicsAdapter(
+            this@HeroDetailActivity,
+            marvelDetailDataResponse.data!!.results
+        )
+        recyclerDetailedComics.apply {
+
+            layoutManager = mLayoutManager
+            adapter = heroDetailedComicsAdapter
+
+        }
+        hideProgressBar()
+    }
+
 
 }

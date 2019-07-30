@@ -6,7 +6,7 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mobile.mavelapp.injection.presenterModelResolver
 import com.mobile.mavelapp.model.Result
-import com.mobile.mavelapp.presenter.CharactersListAdapter
+import com.mobile.mavelapp.presenter.adapters.CharactersListAdapter
 import com.mobile.mavelapp.presenter.main.MainPresenter
 import kotlinx.android.synthetic.main.activity_main.*
 import android.view.Gravity
@@ -15,7 +15,7 @@ import android.widget.Toolbar
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.mobile.mavelapp.R
-import com.mobile.mavelapp.presenter.SearchedCharacterListAdapter
+import com.mobile.mavelapp.presenter.adapters.SearchedCharacterListAdapter
 
 
 class MainActivity : AppCompatActivity(), ViewInterface{
@@ -77,8 +77,10 @@ class MainActivity : AppCompatActivity(), ViewInterface{
             characterHeroAdapter!!.notifyDataSetChanged()
         }
         else{
-            characterHeroAdapter = CharactersListAdapter(this@MainActivity, results)
-            searchedCharacterHeroAdapater = SearchedCharacterListAdapter(this@MainActivity, results)
+            characterHeroAdapter =
+                CharactersListAdapter(this@MainActivity, results)
+            searchedCharacterHeroAdapater =
+                SearchedCharacterListAdapter(this@MainActivity, results)
             recyclerSearched.apply {
                 layoutManager = LinearLayoutManager(this@MainActivity)
                 adapter = searchedCharacterHeroAdapater

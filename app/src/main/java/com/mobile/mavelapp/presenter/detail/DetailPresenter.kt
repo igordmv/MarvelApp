@@ -8,6 +8,7 @@ import com.mobile.mavelapp.presenter.encryption.Md5
 import com.mobile.mavelapp.view.detail.DetailView
 
 class DetailPresenter(val model: DetailPresenterModel) : DetailPresenterInterface {
+
     lateinit var mContext: Context
     lateinit var mView: DetailView
     var timestampStr: String? = null
@@ -34,6 +35,22 @@ class DetailPresenter(val model: DetailPresenterModel) : DetailPresenterInterfac
 
     override fun confirmFailedSeriesRequest() {
         mView.seriesRequestFailed()
+    }
+    override fun confirmSuccessedComicsRequest(marvelDetailDataResponse: DetailDataResponse) {
+        mView.comicsRequestSuccess(marvelDetailDataResponse)
+    }
+
+    override fun confirmFailedComicsRequest() {
+        mView.comicsRequestFailed()
+    }
+
+    override fun callHeroComicsDetailRequest(heroId: String) {
+        timestamp()
+        model.getHeroDetailComics(
+            heroId,
+            timestampStr!!,
+            Constants.PUBLIC_API_KEY,
+            Md5().generateMd5FromString(timestampStr+ Constants.PRIVATE_API_KEY+ Constants.PUBLIC_API_KEY))
     }
     override fun callHeroDetailRequest(heroId: String) {
         timestamp()

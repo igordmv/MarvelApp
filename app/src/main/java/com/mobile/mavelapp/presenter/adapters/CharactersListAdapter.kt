@@ -1,4 +1,4 @@
-package com.mobile.mavelapp.presenter
+package com.mobile.mavelapp.presenter.adapters
 
 import android.content.Context
 import android.content.Intent
