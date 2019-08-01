@@ -51,6 +51,16 @@ class MainActivityTest {
         intended(hasComponent(HeroDetailActivity::class.java!!.getName()))
     }
 
+    @Test
+    fun whenClickOnRecycleSearchedViewItemShouldGoToHeroDetailActivity(){
+        onView(withId(R.id.searchView)).perform(click())
+        onView(withId(R.id.recyclerSearched)).check(matches(isDisplayed()))
+        Assert.assertTrue(viewExists(allOf(withId(R.id.ivHeroList),withEffectiveVisibility(Visibility.VISIBLE)),5000)) //wait 5 seconds
+        onView(withId(R.id.recyclerSearched)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, clickOnViewChild(R.id.ivHeroList)))
+        intended(hasComponent(HeroDetailActivity::class.java!!.getName()))
+    }
+
+
     fun clickOnViewChild(viewId: Int) = object : ViewAction {
         override fun getConstraints() = null
 
