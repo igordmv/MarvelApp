@@ -22,7 +22,6 @@ android {
         }
     }
 }
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -56,10 +55,16 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.4.0'
 
 
-    //empresso
+    //espresso
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test:rules:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.1.0'
+    androidTestImplementation('com.android.support.test.espresso:espresso-contrib:2.0') {
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude module: 'recyclerview-v7'
+    }
 
     //test
     testImplementation 'io.mockk:mockk:1.9.2'
